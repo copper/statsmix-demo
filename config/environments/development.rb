@@ -35,7 +35,4 @@ StatsmixDemo::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
-  # StatsMix configuration options
-  StatsMix.ignore = false
-  # StatsMix.test_metric_name = "Metric for Testing (development.rb)"
 end
