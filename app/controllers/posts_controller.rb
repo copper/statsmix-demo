@@ -44,6 +44,10 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        
+        # send a value of 1 to the 'Posts Created' metric with a timestamp of now
+        StatsMix.track('Posts Created', 1)
+
         format.html { redirect_to @post, :notice => 'Post was successfully created.' }
         format.json { render :json => @post, :status => :created, :location => @post }
       else
@@ -74,6 +78,8 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
+
+    StatsMix.track('Deleted Posts', 1)
 
     respond_to do |format|
       format.html { redirect_to posts_url }
